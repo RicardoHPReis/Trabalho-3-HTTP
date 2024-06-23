@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>GNP Intranet</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="fontawesome/fontawesome-free-6.4.2-web/css/all.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <style>
+        html {
+            font-family: 'Inter', sans-serif;
+            color: #434343;
+        }
+
+        body {
+            background-color: #F9F9F9;
+        }
+
+        hr {
+            color: #C6C6C6;
+        }
+
+        .fundo-dashboard {
+            background-color: #F9F9F9;
+        }
+
+        .carousel-info {
+            max-width: 1320px;
+            height: 200px;
+        }
+
+        .carousel-indicators .btn-carousel {
+            height: 11px;
+            width: 11px;
+            border-radius: 50%;
+            background-color: #9F3029;
+        }
+
+        .carousel-indicators .btn-carousel {
+            height: 11px;
+            width: 11px;
+            border-radius: 50%;
+            background-color: #9F3029;
+        }
+
+
+        .carousel-indicators .btn-seta {
+            text-indent: 0px;
+            height: 11px;
+            width: 11px;
+            color: #9F3029 !important;
+        }
+
+        .contadores-dashboard {
+            height: 75px;
+            background-color: white;
+            justify-content: center;
+            align-content: center;
+            padding: 10px 10px;
+            margin: 10px 10px;
+            border-radius: 8px;
+            border: 1px solid #E0E0E0;
+        }
+
+        .contadores-images {
+            height: auto;
+            width: auto;
+        }
+
+        .btn-dashboard {
+            width: 280px;
+            height: 180px;
+            margin: 10px 10px;
+            color: white;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .btn-dashboard:hover {
+            width: 300px;
+            height: 200px;
+            margin: 0px 0px;
+            color: white;
+            transition: 0.1s linear;
+        }
+
+        .dashboard-images {
+            height: 48px;
+            width: 60px;
+            color: white;
+        }
+
+        .campo-notificacoes {
+            width: 100%;
+            height: 50%;
+            max-width: 450px;
+            max-height: 450px;
+            padding: 10px;
+            margin: 10px;
+            overflow: hidden;
+            box-sizing: content-box;
+            background-color: white;
+            border-radius: 8px;
+            border: 1px solid #E0E0E0;
+        }
+
+        .subcampo-notificacoes {
+            width: 95%;
+            height: auto;
+            max-height: 350px;
+            padding: 10px 10px;
+            overflow: hidden auto;
+            box-sizing: content-box;
+            background-color: white;
+            border-radius: 8px;
+            border: 1px solid #E0E0E0;
+        }
+
+        .box-notificacoes {
+            width: 98%;
+            height: 60px;
+            background-color: #F7F7F7;
+            border-radius: 8px;
+            border: 1px solid #E0E0E0;
+        }
+
+    </style>
+
+    <script>
+        new Vue({
+
+        })
+    </script>
+</head>
+
+<body>
+    <div class="fundo-dashboard">
+        <div class="row p-2">
+            <div class="col-8">
+                <div class="row">
+                    <div id="carouselInicio" class="col carousel slide carousel-info" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button class="btn-seta fa-solid fa-angle-left" type="button"
+                                data-bs-target="#carouselInicio" data-bs-slide="prev"></button>
+                            <button type="button" data-bs-target="#carouselInicio" data-bs-slide-to="0"
+                                class="btn-carousel active" aria-current="true" aria-label="Novidade 1"></button>
+                            <button type="button" data-bs-target="#carouselInicio" data-bs-slide-to="1"
+                                class="btn-carousel" aria-label="Novidade 2"></button>
+                            <button type="button" data-bs-target="#carouselInicio" data-bs-slide-to="2"
+                                class="btn-carousel" aria-label="Novidade 3"></button>
+                            <button class="btn-seta fa-solid fa-angle-right" type="button"
+                                data-bs-target="#carouselInicio" data-bs-slide="next"></button>
+                        </div>
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="Assets_GNP_Intranet\banner\BannerComunicacao.png" class="d-block w-100" alt="Novidades">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="Assets_GNP_Intranet\banner\BannerComunicacao.png" class="d-block w-100" alt="Novidades">
+                            </div>
+                            <div class="carousel-item">
+                                <img src=".Assets_GNP_Intranet\banner\BannerComunicacao.png" class="d-block w-100" alt="Novidades">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <span>Bem vindo, </span>
+                        <span style="font-size: medium; font-weight: 500;">Ricardo Reis</span>
+                    </div>
+                    <hr>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col contadores-dashboard">
+                        <i class="m-2 fa-solid fa-2x fa-clipboard m-2" style="color: #434343;"></i>
+                        <span>Requisições feitas: </span>
+                        <strong>10</strong>
+                    </div>
+                    <div class="col contadores-dashboard">
+                        <i class="fa-solid fa-2x fa-clipboard-check m-2" style="color: #509446;"></i>
+                        <span>Requisições atendidas: </span>
+                        <strong>11</strong>
+                    </div>
+                    <div class="col contadores-dashboard">
+                        <i class="fa-solid fa-2x fa-clipboard-question m-2" style="color: #CB8839;"></i>
+                        <span>Requisições em processo: </span>
+                        <strong>12</strong>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h5>Menu de Requisições</h5>
+                    </div>
+                    <div>
+                        <button class="btn-dashboard" style="background-color: #8C4251;"
+                            @click="redirecionaLogin('/requisicao')">
+                            <i class="dashboard-images fa-solid fa-3x fa-cart-shopping m-3"></i>
+                            <h5>Requisitar Compra</h5>
+                            <span>Solicite compras em geral</span>
+                        </button>
+                        <button class="btn-dashboard" style="background-color: #BE5A5A;"
+                            @click="redirecionaLogin('/home')">
+                            <i class="dashboard-images fa-solid fa-3x fa-dollar-sign m-3"></i>
+                            <h5>Requisitar Reembolso</h5>
+                            <span>Solicite reembolso de um valor</span>
+                        </button>
+                        <button class="btn-dashboard" style="background-color: #D8806C;"
+                            @click="redirecionaLogin('/home')">
+                            <i class="dashboard-images fa-solid fa-3x fa-credit-card m-3"></i>
+                            <h5>Requisitar Pagamento</h5>
+                            <span>Requisitar valor para pagar algo</span>
+                        </button>
+                        <button class="btn-dashboard" style="background-color: #FF8845;"
+                            @click="redirecionaLogin('/home')">
+                            <i class="contadores-images fa-solid fa-3x fa-bookmark m-3"></i>
+                            <h5>Outras Requisições</h5>
+                            <span>Requisição personalizada</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <h5>Menu de Processos</h5>
+                    </div>
+                    <div>
+                        <button class="btn-dashboard" style="background-color: #A67042;"
+                            @click="redirecionaLogin('/processo')">
+                            <i class="dashboard-images fa-solid fa-3x fa-inbox m-2"></i>
+                            <h5>Requisições Feitas</h5>
+                            <span>Veja sua lista de requisições feitas</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="campo-notificacoes">
+                        <div class="row p-2">
+                            <div class="col">
+                                <i class="fa-regular fa-bell"></i>
+                                <strong>Notificações</strong>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="subcampo-notificacoes">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="d-flex align-items-center box-notificacoes m-2 p-2" style="box-shadow: -10px 0px 1px #D30000; border: 1px solid #D30000;">
+                                            <strong style="color: #D30000;">Requisição recusada</strong>
+                                            <span class="ms-auto">#12345</span>
+                                        </div>
+                                        <div class="d-flex align-items-center box-notificacoes m-2 p-2" style="box-shadow: -10px 0px 1px #CB8839; border: 1px solid #CB8839;">
+                                            <strong style="color: #CB8839;">Requisição recepcionado</strong>
+                                            <span class="ms-auto">#12345</span>
+                                        </div>
+                                        <div class="d-flex align-items-center box-notificacoes m-2 p-2" style="box-shadow: -10px 0px 1px #509445; border: 1px solid #509445;">
+                                            <strong style="color: #509445;">Requisição concluída</strong>
+                                            <span class="ms-auto">#12345</span>
+                                        </div>
+                                        <div class="d-flex align-items-center box-notificacoes m-2 p-2" style="box-shadow: -10px 0px 1px #D30000; border: 1px solid #D30000;">
+                                            <strong style="color: #D30000;">Requisição recusada</strong>
+                                            <span class="ms-auto">#12345</span>
+                                        </div>
+                                        <div class="d-flex align-items-center box-notificacoes m-2 p-2" style="box-shadow: -10px 0px 1px #CB8839; border: 1px solid #CB8839;">
+                                            <strong style="color: #CB8839;">Requisição recepcionado</strong>
+                                            <span class="ms-auto">#12345</span>
+                                        </div>
+                                        <div class="d-flex align-items-center box-notificacoes m-2 p-2" style="box-shadow: -10px 0px 1px #509445; border: 1px solid #509445;">
+                                            <strong style="color: #509445;">Requisição concluída</strong>
+                                            <span class="ms-auto">#12345</span>
+                                        </div>
+                                        <div class="d-flex align-items-center box-notificacoes m-2 p-2" style="box-shadow: -10px 0px 1px #D30000; border: 1px solid #D30000;">
+                                            <strong style="color: #D30000;">Requisição recusada</strong>
+                                            <span class="ms-auto">#12345</span>
+                                        </div>
+                                        <div class="d-flex align-items-center box-notificacoes m-2 p-2" style="box-shadow: -10px 0px 1px #CB8839; border: 1px solid #CB8839;">
+                                            <strong style="color: #CB8839;">Requisição recepcionado</strong>
+                                            <span class="ms-auto">#12345</span>
+                                        </div>
+                                        <div class="d-flex align-items-center box-notificacoes m-2 p-2" style="box-shadow: -10px 0px 1px #509445; border: 1px solid #509445;">
+                                            <strong style="color: #509445;">Requisição concluída</strong>
+                                            <span class="ms-auto">#12345</span>
+                                        </div>
+                                        <div class="d-flex align-items-center box-notificacoes m-2 p-2" style="box-shadow: -10px 0px 1px #D30000; border: 1px solid #D30000;">
+                                            <strong style="color: #D30000;">Requisição recusada</strong>
+                                            <span class="ms-auto">#12345</span>
+                                        </div>
+                                        <div class="d-flex align-items-center box-notificacoes m-2 p-2" style="box-shadow: -10px 0px 1px #CB8839; border: 1px solid #CB8839;">
+                                            <strong style="color: #CB8839;">Requisição recepcionado</strong>
+                                            <span class="ms-auto">#12345</span>
+                                        </div>
+                                        <div class="d-flex align-items-center box-notificacoes m-2 p-2" style="box-shadow: -10px 0px 1px #509445; border: 1px solid #509445;">
+                                            <strong style="color: #509445;">Requisição concluída</strong>
+                                            <span class="ms-auto">#12345</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="campo-notificacoes">
+                        <div class="row p-2">
+                            <div class="col">
+                                <i class="fa-regular fa-calendar"></i>
+                                <strong>Calendário</strong>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="subcampo-notificacoes">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
