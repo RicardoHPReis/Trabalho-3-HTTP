@@ -61,7 +61,7 @@ class HTTP_Servidor:
         except:
             self.logger.error(f"Cliente removido:  {endereco}")
             self.__clientes.remove(cliente_socket)
-
+        
     
     def iniciar_servidor(self):
         inicializar = ''
@@ -91,14 +91,14 @@ class HTTP_Servidor:
         return iniciar_server
 
 
-    def http_enviar_pagina(self, cliente_socket:s.socket, endereco:tuple, nome_arquivo: str):
+    def http_enviar_arquivo(self, cliente_socket:s.socket, endereco:tuple, nome_arquivo: str, caminho_arquivo: str):
         if nome_arquivo == "/":
             nome_arquivo = "/index.html"
         
         nome_arquivo = nome_arquivo.replace("/", "")
-        num_pacotes: int = (os.path.getsize(os.path.join("./Pages", nome_arquivo)) // self.__TAM_BUFFER) + 1
+        num_pacotes: int = (os.path.getsize(os.path.join(caminho_arquivo, nome_arquivo)) // self.__TAM_BUFFER) + 1
         
-        with open(os.path.join("./Pages", nome_arquivo), "rb") as arquivo:
+        with open(os.path.join(caminho_arquivo, nome_arquivo), "rb") as arquivo:
             i = 0
             while data := arquivo.read(self.__TAM_BUFFER):
                 try:
@@ -110,26 +110,18 @@ class HTTP_Servidor:
                     break
                 i += 1
         self.logger.info(f"'OK-4-Todos os {num_pacotes} do arquivo {nome_arquivo} foram enviados!'")
+        
+    def verificar_arquivo(self, nome_arquivo: str):
+        if os.path.exists(os.path.join("./Pages", nome_arquivo)):
+            return True
+        elif os.path.exists(os.path.join("./Images", nome_arquivo)):
+            return True
+        elif os.path.exists(os.path.join("./Videos", nome_arquivo)):
+            return True
+        else:
+            return False 
+        
     
-    
-    def http_enviar_imagem(self, cliente_socket:s.socket, endereco:tuple, nome_imagem: str):
-        nome_imagem = nome_imagem.replace("/", "")
-        num_pacotes: int = (os.path.getsize(os.path.join("./Images", nome_imagem)) // self.__TAM_BUFFER) + 1
-        
-        with open(os.path.join("./Image", nome_imagem), "rb") as arquivo:
-            i = 0
-            while data := arquivo.read(self.__TAM_BUFFER):
-                try:
-                    cliente_socket.send(data)
-                    self.logger.info(f"Destinatário: {endereco} - Enviado: 'Pacote {nome_imagem} {i+1}'")
-                except:
-                    self.logger.error(f"Cliente removido:  {endereco}")
-                    self.__clientes.remove(cliente_socket)
-                    break
-                i += 1
-        self.logger.info(f"'OK-4-Todos os {num_pacotes} do arquivo {nome_imagem} foram enviados!'")
-        
-        
     def http_servidor(self, cliente_socket:s.socket, endereco:tuple):
         try:
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -142,8 +134,14 @@ class HTTP_Servidor:
             file_paths = os.listdir(caminho_pag)
             num_arquivos = len(file_paths)
             
+            caminho_vid = str(p.Path.cwd()) + '\Videos'
+            video_paths = os.listdir(caminho_vid)
+            num_videos = len(video_paths)
+            
             requisicao_http = self.mensagem_recebimento(cliente_socket, endereco).split('\n')
             http_response = requisicao_http[0].strip().split(" ")
+                      
+            arquivo_existe = self.verificar_arquivo(http_response[1].replace("/", ""))
                       
             if http_response[0] == "":
                 self.logger.error("ERRO-1-Erro na Requisição")
@@ -163,7 +161,7 @@ class HTTP_Servidor:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 self.__clientes.remove(cliente_socket)
 
-            elif num_arquivos <= 0 and num_images <= 0:
+            elif ((num_arquivos <= 0 and num_images <= 0) and num_videos <= 0):
                 self.logger.error("ERRO-3-Nenhum arquivo no servidor")
                 os.system('cls' if os.name == 'nt' else 'clear')
                 self.titulo()
@@ -172,21 +170,29 @@ class HTTP_Servidor:
                 os.system('cls' if os.name == 'nt' else 'clear')
                 self.__clientes.remove(cliente_socket)
                 
-            else:
-                if http_response[1].endswith(".jpg") or http_response[1].endswith(".jpeg") or http_response[1].endswith(".png"):
+            elif arquivo_existe:
+                if http_response[1].endswith(".html"):
                     self.mensagem_envio(cliente_socket, endereco, "HTTP/1.1 200 OK\r\n\r\n")
-                    self.http_enviar_imagem(cliente_socket, endereco, http_response[1])
+                    self.http_enviar_arquivo(cliente_socket, endereco, http_response[1], "./Pages")
+                elif http_response[1].endswith(".mp4"):
+                    self.mensagem_envio(cliente_socket, endereco, "HTTP/1.1 200 OK\r\n\r\n")
+                    self.http_enviar_arquivo(cliente_socket, endereco, http_response[1], "./Videos")
                 else:
                     self.mensagem_envio(cliente_socket, endereco, "HTTP/1.1 200 OK\r\n\r\n")
-                    self.http_enviar_pagina(cliente_socket, endereco, http_response[1])
+                    self.http_enviar_arquivo(cliente_socket, endereco, http_response[1], "./Images")
+                    
+            else:
+                self.mensagem_envio(cliente_socket, endereco, "HTTP/1.1 404 Not Found\r\n\r\n")
+                self.http_enviar_arquivo(cliente_socket, endereco, "/erro_404.html", "./Pages")
+                cliente_socket.close()
                 
         except TimeoutError:
             self.mensagem_envio(cliente_socket, endereco, "HTTP/1.1 504 Gateway Timeout\r\n\r\n")
-            self.http_enviar_pagina(cliente_socket, endereco, "/erro_timeout.html")
+            self.http_enviar_arquivo(cliente_socket, endereco, "/erro_timeout.html", "./Pages")
             cliente_socket.close()
         except Exception as e:
             self.mensagem_envio(cliente_socket, endereco, "HTTP/1.1 404 Not Found\r\n\r\n")
-            self.http_enviar_pagina(cliente_socket, endereco, "/erro_404.html")
+            self.http_enviar_arquivo(cliente_socket, endereco, "/erro_404.html", "./Pages")
             cliente_socket.close()
             
 
