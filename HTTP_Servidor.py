@@ -2,8 +2,6 @@ import socket as s
 import time as t
 import logging as l
 import threading as th
-import hashlib as h
-import pathlib as p
 import os
 
 
@@ -21,7 +19,7 @@ class HTTP_Servidor:
 
         self.__server_socket = s.socket(s.AF_INET, s.SOCK_STREAM)
         self.__server_socket.bind(self.__ENDERECO_IP)
-        self.__server_socket.settimeout(60)
+        #self.__server_socket.settimeout(60)
         self.__server_socket.listen()
         self.logger.info(f"Socket do servidor criado na porta: {self.__ENDERECO_IP}")
         
@@ -91,10 +89,7 @@ class HTTP_Servidor:
         return iniciar_server
 
 
-    def http_enviar_arquivo(self, cliente_socket:s.socket, endereco:tuple, nome_arquivo: str, caminho_arquivo: str):
-        if nome_arquivo == "/":
-            nome_arquivo = "/index.html"
-        
+    def http_enviar_arquivo(self, cliente_socket:s.socket, endereco:tuple, nome_arquivo: str, caminho_arquivo: str):      
         nome_arquivo = nome_arquivo.replace("/", "")
         num_pacotes: int = (os.path.getsize(os.path.join(caminho_arquivo, nome_arquivo)) // self.__TAM_BUFFER) + 1
         
@@ -125,21 +120,21 @@ class HTTP_Servidor:
     def http_servidor(self, cliente_socket:s.socket, endereco:tuple):
         try:
             os.system('cls' if os.name == 'nt' else 'clear')
-
-            caminho_img = str(p.Path.cwd()) + '\Images'
-            image_paths = os.listdir(caminho_img)
+            
+            image_paths = os.listdir("./Images")
             num_images = len(image_paths)
             
-            caminho_pag = str(p.Path.cwd()) + '\Pages'
-            file_paths = os.listdir(caminho_pag)
+            file_paths = os.listdir("./Pages")
             num_arquivos = len(file_paths)
             
-            caminho_vid = str(p.Path.cwd()) + '\Videos'
-            video_paths = os.listdir(caminho_vid)
+            video_paths = os.listdir("./Videos")
             num_videos = len(video_paths)
             
             requisicao_http = self.mensagem_recebimento(cliente_socket, endereco).split('\n')
             http_response = requisicao_http[0].strip().split(" ")
+            
+            if http_response[1] == "/":
+                http_response[1] = "/index.html"
                       
             arquivo_existe = self.verificar_arquivo(http_response[1].replace("/", ""))
                       
